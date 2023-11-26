@@ -1,0 +1,94 @@
+﻿@model ChatRoom.ViewModels.Users.RegisterUser
+
+<div class="card">
+    <div class="card-header">
+        <h4>ثبت کاربر جدید</h4>
+    </div>
+    <div class="card-body">
+
+
+        <div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <form asp-action="Create" class="row" enctype="multipart/form-data">
+
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="UserName" class="control-label"></label>
+                        <input asp-for="UserName" class="form-control" />
+                        <span asp-validation-for="UserName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="PhoneNumber" class="control-label"></label>
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="Password" class="control-label"></label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+    
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="Name" class="control-label"></label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="Bio" class="control-label"></label>
+                        <input asp-for="Bio" class="form-control" />
+                        <span asp-validation-for="Bio" class="text-danger"></span>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="ProfileImg" class="control-label"></label>
+                        <input type="file" name="ProfileImg" />
+                    </div>
+
+
+                </div>
+                <div clas="col-lg-12">
+                    <div class="form-group">
+                        <input type="submit" value="ثبت" class="btn btn-primary" />
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script src="/datepicker/js/lib/persian-date.min.js"></script>
+    <script src="/datepicker/js/lib/persian-datepicker.min.js"></script>
+    <script src="/datepicker/js/app.js"></script>
+
+}
+@section Styles{
+    <link rel="stylesheet" href="/datepicker/css/lib/persian-datepicker.min.css">
+
+    <link rel="stylesheet" href="/datepicker/css/main.css">
+
+    }

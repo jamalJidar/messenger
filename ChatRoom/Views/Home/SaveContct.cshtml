@@ -1,0 +1,53 @@
+﻿ @model ChatRoom.ViewModels.SaveContactViewModel
+
+
+ 
+
+<div class="card">
+    <div class="card-header">
+        <h4>ثبت کاربر جدید</h4>
+    </div>
+    <div class="card-body">
+           <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <form asp-action="SaveContct" class="row">
+
+                   <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Subscribers" class="control-label"></label>
+                    <select asp-for="Subscribers" class="form-control"> 
+                        @foreach (var item in (List<Person>)ViewBag.Subscribers)
+                        {
+                            <option value="@item.Id">@item.PhoneNumber - @item.UserName</option>
+                        } 
+                      </select>
+                        <span asp-validation-for="Subscribers" class="text-danger"></span>
+                    </div>
+
+
+                </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    @foreach (var item in (List<Person>) ViewBag.contact)
+                    {
+                        <span style="    background: green;margin-bottom: 10px;
+    color: #fff;
+    padding: 10px;
+    border-radius: 10px;"> @item.PhoneNumber - @item.UserName</span>
+                    }
+                </div>
+
+
+            </div>
+                <div clas="col-lg-12">
+                    <div class="form-group">
+                        <input type="submit" value="ثبت" class="btn btn-primary" />
+                    </div>
+                </div>
+            </form>
+         
+
+    </div>
+</div>
+ 
+ 

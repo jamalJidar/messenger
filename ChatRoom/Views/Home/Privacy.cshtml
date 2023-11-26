@@ -1,0 +1,47 @@
+﻿<input type="file" id="File" multiple />
+<button onclick="UploadFile()" type="submit">Add</button>
+
+<progress id="progressBar" value="0" max="100" style="width: 300px;"></progress>
+<h3 id="status"></h3>
+<p id="loaded_n_total"></p>
+
+<div id="fileDiv" style="display:none">
+    <h2 id="total"></h2>
+    <h3><u>Uploaded Paths</u></h3>
+    <div id="pathDiv"></div>
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        var counter = 0;
+        function UploadFile() {
+            var files = document.getElementById("File").files
+
+            // Loop through files
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+
+                var xhttp = new XMLHttpRequest();
+
+                xhttp.open("POST", "/Xaero/UploadFile", true);
+                data = new FormData();
+                data.append("file", file);
+
+                xhttp.upload.addEventListener("progress", progressHandler);
+                xhttp.addEventListener("load", completeHandler);
+                xhttp.addEventListener("error", errorHandler);
+                xhttp.addEventListener("abort", abortHandler);
+
+                xhttp.send(data);
+
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        counter++;
+                        document.getElementById("fileDiv").style.display = "block";
+                        document.getElementById("total").innerHTML = counter + " files uploaded successfully";
+                    }
+                };
+            }
+        }
+    </script>
+}

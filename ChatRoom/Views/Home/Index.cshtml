@@ -1,0 +1,303 @@
+﻿
+<div style="background:red;display:none;">
+	<input type="file" id="test" multiple />
+	<a id="_upload" style="cursor:pointer; color:#fff; font-size:16px">upload</a>
+
+</div>
+<div class="container-fluid" id="main-container">
+	<div class="row" style="position:fixed; background:red"></div>
+	<div class="row h-100">
+			<div class="col-12 col-sm-5 col-md-4 d-flex flex-column" id="chat-list-area" style="position:relative;">
+
+			<!-- Navbar -->
+			<div class="row d-flex flex-row align-items-center p-2" id="navbar">
+				<img alt="Profile Photo" class="img-fluid rounded-circle mr-2" style="height:50px;width:50px; cursor:pointer;"
+					 src="/Home/GetPicProfile"
+				onclick="showProfileSettings()" id="display-pic">
+			
+				<div class="text-white font-weight-bold" id="username">@User?.Identity?.Name</div>
+				<div class="nav-item dropdown ml-auto">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+						<i class="fa fa-ellipsis-v text-white"></i>
+					</a>
+					<div class="dropdown-menu dropdown-menu-right">
+						<a class="dropdown-item">
+							new group
+							<label class="fa fa-group text-muted px-3" data-toggle="modal" data-target="#CreateGroup"> </label>
+						</a>
+						<a class="dropdown-item" href="#">Archived</a>
+						<a class="dropdown-item" href="#">Starred</a>
+						<a class="dropdown-item" href="#">Settings</a>
+						<a class="dropdown-item" href="/Account/Logout">Log Out</a>
+					</div>
+				</div>
+			</div>
+			<div id="searchBox">
+				<div class="form-group">
+					<input type="search" class="form-control" id="inputSearch" placeholder="search">
+			         <button type="button" class="fa fa-search" id="btnSearch"></button>
+				</div>
+				
+				<ul class="list-group" id="listResualtSearch">
+				
+				<li class="list-group-item">
+						<span class="pull-left" onclick="document.getElementById('listResualtSearch').style.display='none'">X</span>
+				</li>
+				</ul>
+			</div>
+			<!-- Chat List -->
+			<div class="row" id="chat-list" style="overflow:auto;">
+             </div>
+
+			<!-- Profile Settings -->
+			<div class="d-flex flex-column w-100 h-100" id="profile-settings">
+				<div class="row d-flex flex-row align-items-center p-2 m-0" style="background:#009688; min-height:65px;">
+					<i class="fa fa-arrow-left p-2 mx-3 my-1 text-white" style="font-size: 1.5rem; cursor: pointer;" onclick="hideProfileSettings()"></i>
+					<div class="text-white font-weight-bold">Profile</div>
+				</div>
+				<div class="d-flex flex-column" style="overflow:auto;">
+					<img alt="Profile Photo" src="/Home/GetPicProfile"
+					class="img-fluid rounded-circle my-5 justify-self-center mx-auto" id="profile-pic">
+					<input type="file" id="profile-pic-input" class="d-none">
+					<div class="bg-white px-3 py-2">
+						<div class="text-muted mb-2"><label for="input-name">Your Name</label></div>
+						<input type="text" name="name" id="input-name" class="w-100 border-0 py-2 profile-input">
+					</div>
+					<div class="text-muted p-3 small">
+						This is not your username or pin. This name will be visible to your WhatsApp contacts.
+					</div>
+					<div class="bg-white px-3 py-2">
+						<div class="text-muted mb-2"><label for="input-about">About</label></div>
+						<input type="text" name="name" id="input-about" value="" class="w-100 border-0 py-2 profile-input">
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<!-- Message Area -->
+		<div class="d-none d-sm-flex flex-column col-12 col-sm-7 col-md-8 p-0 h-100" id="message-area">
+			<div class="w-100 h-100 overlay"></div>
+
+			<!-- Navbar -->
+			<div class="row d-flex flex-row align-items-center p-2 m-0 w-100" id="navbar">
+				<div class="d-block d-sm-none">
+					<i class="fa fa-arrow-left p-2 mr-2 text-white" style="font-size: 1.5rem; cursor: pointer;" onclick="showChatList()"></i>
+				</div>
+				<a href="#"><img src="https://via.placeholder.com/400x400" alt="Profile Photo" class="img-fluid rounded-circle mr-2" style="height:50px;width:50px" id="pic"></a>
+				<div class="d-flex flex-column">
+					<div class="text-white font-weight-bold" id="name"></div>
+                    <span class="text-white small time" id="details"></span>
+					<span class="text-white small time" id="typeMeeage"></span>
+				</div>
+				<div class="d-flex flex-row align-items-center ml-auto">
+					<a href="#"><i class="fa fa-search mx-3 text-white d-none d-md-block"></i></a>
+					<a href="#"><i class="fa fa-paperclip mx-3 text-white d-none d-md-block"></i></a>
+					<a href="#"><i class="fa fa-ellipsis-v mr-2 mx-sm-3 text-white"></i></a>
+				</div>
+			</div>
+			 
+            <div class="d-flex flex-column" id="bio">this is test message. </div>
+			<!-- Messages -->
+			<div class="d-flex flex-column" id="messages"></div>
+
+			<!-- Input -->
+			<div class="d-none justify-self-end align-items-center flex-row" id="input-area">
+				<a href="#"><i class="fa fa-smile text-muted px-3" style="font-size:1.5rem;" id="emojiBtn"></i></a>
+
+ 
+				<input type="text" name="message" id="input" placeholder="Type a message" class="flex-grow-1 border-0 px-3 py-2 my-3 rounded shadow-sm" />
+				<label   class="fa fa-file text-muted px-3" data-toggle="modal" data-target="#exampleModal" 
+				        id="UploadFile"> </label>
+				 
+				<i class="fa fa-paper-plane text-muted px-3" style="cursor:pointer;"  id="sendButton"></i>
+
+				@* onclick="sendMessage()" *@
+			</div>
+			<ul class="nav nav-tabs" id="emojeTab"></ul>
+            <!-- Tab panes -->
+			<div class="tab-content" id="emojeTabContent"></div>
+
+		</div>
+	</div>
+	@* <i class="fa fa-plus  list-contact" id="openListContact"></i>
+	<div class="list_contact"></div>
+ *@
+</div>
+
+
+
+ @section Styles{
+    <link href="/css/edit_pic.css" rel="stylesheet" />
+ }
+ 
+@section Scripts{
+	<script src="/js/loadEmoji.js" asp-append-version="true"></script>
+    <script src="/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+	<script src="/js/script.js"></script>
+	<script   src="/js/chat.js" asp-append-version="true"></script>
+
+	@* <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script> *@
+    <script src="/js/site.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/camanjs/4.1.2/caman.min.js"></script>
+    @* <script src="/js/edit_pic.js"></script> *@
+	<script src="/js/UploadDownload.js"></script>
+
+	
+
+}
+
+ 
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel"> آپلود  فایل </h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+
+				<form id="form" name="form" action="https://localhost:7081/uploader" enctype="multipart/form-data" method="post">
+					<div class="buttons">
+						<div class="upload-button">
+							 <input id="files" name="files" type="file" size="1"    style="display:block"/>
+						</div>
+					</div>
+
+
+					<div class="form-group">
+						<label for="Caption"> توضیحات فایل  </label>
+						<input type="text" class="form-control" id="Caption"   placeholder=" توضیحات" required>
+					 
+					</div>
+				</form>
+				<div class="circular-progress" data-inner-circle-color="cyan" data-percentage="3"
+					 data-progress-color="blue"
+					 data-bg-color="skyblue" id="CircularProgressBlack">
+					<div class="inner-circle"></div>
+					<p class="percentage" id="CircularProgressBlackLable">0%</p>
+				</div>
+
+				@* 		  <div class="preview-wrapper">
+					<canvas id="canvas"></canvas>
+				</div>
+				<div class="filter-buttons">
+					<div class="filter-group">
+						<button id="brightness-dec">-</button>
+						<span class="filter-name">روشنایی</span>
+						<button id="brightness-inc">+</button>
+					</div>
+					<div class="filter-group">
+						<button id="contrast-dec">-</button>
+						<span class="filter-name">کنتراست</span>
+						<button id="contrast-inc">+</button>
+					</div>
+					<div class="filter-group">
+						<button id="saturation-dec">-</button>
+						<span class="filter-name">اشباع</span>
+						<button id="saturation-inc">+</button>
+					</div>
+					<div class="filter-group">
+						<button id="vibrance-dec">-</button>
+						<span class="filter-name">لرزش</span>
+						<button id="vibrance-inc">+</button>
+					</div>
+					<div class="filter-group">
+						<button id="exposure-dec">-</button>
+						<span class="filter-name">نوردهی</span>
+						<button id="exposure-inc">+</button>
+					</div>
+					<div class="filter-group">
+						<button id="noise-dec" class="disabled">-</button>
+						<span class="filter-name">نویز</span>
+						<button id="noise-inc">+</button>
+					</div>
+					<div class="filter-group">
+						<button id="sharpen-dec" class="disabled">-</button>
+						<span class="filter-name">تیز کردن</span>
+						<button id="sharpen-inc">+</button>
+					</div>
+					<div class="filter-group">
+						<button id="sepia-dec" class="disabled">-</button>
+						<span class="filter-name">قهوه ای</span>
+						<button id="sepia-inc">+</button>
+					</div>
+					<div class="filter-group">
+						<button id="hue-dec" class="disabled">-</button>
+						<span class="filter-name">رنگ</span>
+						<button id="hue-inc">+</button>
+					</div>
+					<div class="filter-group">
+						<button id="blur-dec" class="disabled">-</button>
+						<span class="filter-name">تاری</span>
+						<button id="blur-inc">+</button>
+					</div>
+					<div class="filter-group">
+						<button id="gamma-dec" class="disabled">-</button>
+						<span class="filter-name">گاما</span>
+						<button id="gamma-inc">+</button>
+					</div>
+					<div class="filter-group">
+						<button id="clip-dec" class="disabled">-</button>
+						<span class="filter-name">کلیپ</span>
+						<button id="clip-inc">+</button>
+					</div>
+				</div>
+				<div class="editor-buttons">
+					<input type="file" id="upload-file" placeholder="Upload a Picture" />
+					<label for="upload-file">
+						آپلود تصویر  </label>
+					<button id="download-btn"> ذخیره</button>
+					<br />
+					<button id="vintage-btn">Vintage</button>
+					<button id="lomo-btn">Lomo</button>
+					<button id="clarity-btn">Clarity</button>
+					<button id="sincity-btn">Sin City</button>
+					<button id="crossprocess-btn">Cross Process</button>
+					<button id="pinhole-btn">Pinhole</button>
+					<button id="nostalgia-btn">Nostalgia</button>
+					<button id="majestic-btn">Her Majesty</button>
+				</div>   *@
+				 	 
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal" id="btnCanselSendFile"> انصراف</button>
+				<button type="button" onclick="uploadFiles('files');" class="btn btn-info"> ارسال </button>
+			</div>
+		</div>
+	</div>
+</div>
+ 
+<div class="modal fade" id="CreateGroup" tabindex="-1" role="dialog" aria-labelledby="CreateGroupLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="CreateGroupLabel"> آپلود تصویر</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				 <div class="col-auto">
+					<label class="sr-only" for="InputGroupName">نام گروه : </label>
+      <div class="input-group mb-2">
+        <div class="input-group-prepend">
+							<button type="button" class="btn btn-primary mb-3" id="BtnNewGroup">ساختن گروه</button>
+        </div>
+						<input type="text" class="form-control" id="InputGroupName" placeholder="نام گروه" style="height:37px">
+      </div>
+    </div>
+	
+
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal"> انصراف</button>
+
+			</div>
+		</div>
+	</div>
+</div>

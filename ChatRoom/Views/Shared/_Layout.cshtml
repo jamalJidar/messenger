@@ -1,0 +1,33 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Whatsapp</title>
+    
+	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/css/all.css">
+ 
+	<link rel="stylesheet" href="/css/style.css">
+	<link href="/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/css/fonts.css" rel="stylesheet" />
+	@RenderSection("Styles" , false)
+</head>
+
+<body>
+	
+@RenderBody()
+
+<script src="/js/popper.min.js"></script>
+ <script src="~/lib/jquery/dist/jquery.min.js"></script>
+ <script src="/js/bootstrap.min.js"></script>
+ <script src="/js/date-utils.js"></script>
+
+ 
+ 
+
+ @RenderSection("scripts" , false)
+</body>
+
+</html>
