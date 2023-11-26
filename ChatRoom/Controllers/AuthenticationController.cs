@@ -21,7 +21,6 @@ namespace ChatRoom.Controllers
 
 
 		[HttpGet]
-
 		public async Task<IActionResult> Login(LoginUser model)
 		{
 			try
@@ -35,13 +34,12 @@ namespace ChatRoom.Controllers
 			}
 			catch (Exception ex)
 			{
-				_logger.LogError(ex.Message );
+				_logger.LogError(ex.Message);
 				return StatusCode(StatusCodes.Status500InternalServerError, "erorr");
 			}
 		}
 
 		[HttpGet]
-
 		public async Task<IActionResult> Register(RegisterUser model)
 		{
 			try

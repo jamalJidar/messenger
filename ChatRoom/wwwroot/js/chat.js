@@ -1,6 +1,5 @@
 "use strict";
 let chat_list = document.getElementById('chat-list');
-
 var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
 //Disable the send button until connection is established.
 document.getElementById("sendButton").disabled = true;
@@ -23,8 +22,7 @@ let attach =` this message  has attach file.
   link file  download , or preview media, or get link  meta data ;
  ` 
 connection.start().then(function () {
-
-    notifyMe()
+    
     document.getElementById("sendButton").disabled = false;
     CurrentUser = ''
     connection.invoke("Init").then(function () {
@@ -157,8 +155,20 @@ connection.on("ReceiveMessage", function (msg, check = false) {
     div.classList.add('bg-white', 'shadow-sm');
     div.classList.add('message-item', 'p-1');
     div.innerHTML = `<div class="options">
-		 	<a href="#"><i class="fa fa-angle-down text-muted px-2"></i>salam</a>
-		</div>
+       <div class="nav-item dropdown ml-auto">
+					<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+						<i class="fa fa-angle-down text-muted px-2""></i></a>
+				 <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" onclick="alert(' Coming Soon ... ')"> کپی	</a>
+						<a class="dropdown-item" onclick="alert(' Coming Soon ... ')">پاسخ</a>
+						<a class="dropdown-item" onclick="alert(' Coming Soon ... ')">ارسال به دیگری</a>
+						<a class="dropdown-item" onclick="alert(' Coming Soon ... ')">ویرایش</a>
+						<a class="dropdown-item" onclick="alert(' Coming Soon ... ')">حذف</a>
+
+                 </div>
+				</div>
+		 
+    </div>
 		${msg.messageType == 0 ? htmlForGroup : ""}
 		<div class="d-flex flex-row">
 			<div class="body m-1 mr-2">
@@ -382,16 +392,14 @@ connection.on("LsitMessageGroup", function (_group, _messages) {
     mClassList(DOM.messageAreaOverlay).add("d-none");
     mClassList(DOM.inputArea).contains("d-none", (elem) => elem.remove("d-none").add("d-flex"));
 })
-
-
 function changepic(div) {
     document.getElementById(div).src = "https://upload.wikimedia.org/wikipedia/commons/1/1b/Square_200x200.png";
 }
-
-function notifyMe() { }
-
-
-
+connection.on("notification", function () {
+    var _audio = new Audio('/sms/sms.mp3');
+       _audio.play();
+        
+})
 connection.on("UserProfile", function (result) {
 
     user.name = result.name;
@@ -406,9 +414,6 @@ connection.on("UserProfile", function (result) {
     //});
 
 });
-
-
-
 document.getElementById("sendButton").addEventListener("click", function (event) {
     var message = document.getElementById("input").value;
     if (message.length > 0) {
@@ -434,13 +439,6 @@ document.getElementById("sendButton").addEventListener("click", function (event)
     }
 
 });
-//document.getElementById("addNewGroup").addEventListener("click", function (event) {
-
-//    alert('addNewGroup')
-
-//});
-
- 
 document.getElementById("input").addEventListener("keydown", function (event) {
     if (_messageType === 'private') {
         if (event.keyCode !== 13) {
@@ -500,14 +498,6 @@ connection.on("UserType", function (res, type) {
 
 });
 
-
-
-
-
-//document.getElementById('openListContact').addEventListener('click', function () {
-
-//});
-
 connection.on("ShowProfileOtherUser", function (result) {
 
     DOM.messageAreaPic.src = result.profileImage
@@ -518,12 +508,10 @@ connection.on("ShowProfileOtherUser", function (result) {
         callBio = true
     }
 });
-
 document.getElementById('input').addEventListener('mouseout', function () {
 
 
 })
-
 document.getElementById('BtnNewGroup').addEventListener('click', function () {
     let _groupName = document.getElementById('InputGroupName').value;
 
@@ -533,7 +521,6 @@ document.getElementById('BtnNewGroup').addEventListener('click', function () {
 
 
 });
-
 document.getElementById('btnSearch').addEventListener('click', function () {
 
     let searchValue = document.getElementById('inputSearch').value;
@@ -547,15 +534,7 @@ document.getElementById('btnSearch').addEventListener('click', function () {
 });
 
 connection.on("Search", function (result) {
-    console.log("users")
-
-
-    //    let listResualtSearch = document.getElementById('listResualtSearch');
-    console.table(result)
-    /*
-        <li class="list-group-item">Cras justo odio</li>
-    	
-    */
+ 
     result.forEach((_user) => {
         let _li = document.createElement('li');
         _li.classList.add('list-group-item');
@@ -566,22 +545,13 @@ connection.on("Search", function (result) {
 
 
 });
-
-
-
 connection.on("addNewGroup", function (result) {
 
     alert(result)
 });
-
-
-
 //config contact  - create element , ...
-
-
 let getById = (id, parent) => parent ? parent.getElementById(id) : getById(id, document);
 let getByClass = (className, parent) => parent ? parent.getElementsByClassName(className) : getByClass(className, document);
-
 const DOM = {
     chatListArea: getById("chat-list-area"),
     messageArea: getById("message-area"),
@@ -603,7 +573,6 @@ const DOM = {
     displayPic: getById("display-pic"),
     typeMessage: getById("typeMessage"),
 };
-
 let mClassList = (element) => {
     return {
         add: (className) => {
@@ -621,28 +590,6 @@ let mClassList = (element) => {
     };
 };
 
-// 'areaSwapped' is used to keep track of the swapping
-// of the main area between chatListArea and messageArea
-// in mobile-view
-let areaSwapped = false;
-
-// 'chat' is used to store the current chat
-// which is being opened in the message area
-let chat = null;
-
-// this will contain all the chats that is to be viewed
-// in the chatListArea
-let chatList = [];
-
-// this will be used to store the date of the last message
-// in the message area
-let lastDate = "";
-
-// 'populateChatList' will generate the chat list
-// based on the 'messages' in the datastore
-
-
-
 let showChatList = () => {
     if (areaSwapped) {
         mClassList(DOM.chatListArea).remove("d-none").add("d-flex");
@@ -650,24 +597,18 @@ let showChatList = () => {
         areaSwapped = false;
     }
 };
-
-
-
 let showProfileSettings = () => {
     DOM.profileSettings.style.left = 0;
     DOM.profilePic.src = user.pic;
     DOM.inputName.value = user.name;
 };
-
 let hideProfileSettings = () => {
     DOM.profileSettings.style.left = "-110%";
-    //  DOM.username.innerHTML = user.name;
+   
 };
-
 window.addEventListener("resize", e => {
     if (window.innerWidth > 575) showChatList();
 });
-
 function init(user) {
     console.log(user)
     DOM.username.innerHTML = user.name;
@@ -678,17 +619,6 @@ function init(user) {
     DOM.inputName.addEventListener("blur", (e) => user.name = e.target.value);
     generateChatList();
 
-    /*	console.log("Click the Image at top-left to open settings.");*/
+    
 };
-
-
-
-//datastory
-
-
-
-
-
-// message status - 0:sent, 1:delivered, 2:read
-
-
+ 

@@ -37,7 +37,8 @@ namespace ChatRoom.Models
 		public DateTime Time { get; set; }
 		public MessageStatus MessageStatus { get; set; }
 		public DeleteMessageStatus DeleteMessageStatus { get; set; }
-		public DateTime _time
+        public Guid? ParentId { get; set; }
+        public DateTime _time
 		{
 			get
 			{
