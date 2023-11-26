@@ -14,4 +14,10 @@
 <br/>
 <br/>
 <br/>
-
+<h2>  How to use ? /h2>
+<hr> 
+<ul> 
+<li> /Account/Create => Register new user  </li>
+  <li> /AddRole => Add role from all user   </li>
+  <li> /Account/NewUser => Create random User</li>
+</ul>
