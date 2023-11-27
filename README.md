@@ -20,5 +20,5 @@
   <li> /Account/Create => Register new user  </li>
   <li> /AddRole => Add role from all user   </li>
   <li> /Account/NewUser => Create random User</li>
-  <li>/Account/ChangePassword =>  Change Password wya Phone Number</li>
+  <li>/Account/ChangePassword =>  Change Password via Phone Number</li>
 </ul>
