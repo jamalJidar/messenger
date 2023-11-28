@@ -38,5 +38,43 @@
 <pre> sudo apt install dotnet-sdk-7.0</pre>
 <pre>  sudo apt update -y  </pre>
 <pre> sudo apt install dotnet-sdk-7.0</pre>
+<hr> 
+<h3> install mongodb  </h3>
  <pre> sudo apt update
 sudo apt dist-upgrade -y</pre>
+<pre> sudo apt install gnupg</pre> 
+<per> echo "deb http://security.ubuntu.com/ubuntu impish-security main" | sudo tee /etc/apt/sources.list.d/impish-security.list
+sudo apt update
+sudo apt install libssl1.1</per>
+<pre> wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | sudo apt-key add -
+</pre>
+<pre> 
+  echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/5.0 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-5.0.list
+
+</pre>
+
+<pre> sudo apt update
+sudo apt install -y mongodb-org</pre>
+<pre>
+  sudo systemctl enable mongod
+</pre>
+<pre>
+  sudo service mongod start
+</pre>
+<pre> 
+  sudo service mongod status
+</pre>
+
+<pre> 
+sudo nano /etc/mongod.conf
+</pre>
+<pre>
+  sudo systemctl enable mongodb
+<pre> 
+sudo systemctl restart mongod
+</pre>
+<pre> 
+sudo lsof -i | grep mongo
+</pre>
+
+
