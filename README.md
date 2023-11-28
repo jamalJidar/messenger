@@ -31,6 +31,12 @@
   <br>
   <hr>
 <h2> learn inistallation in  linux ubuntu  </h2>
-<code> sudo apt-get update -y</code>
-
-  
+<pre> sudo apt update -y</pre>
+<pre>   wget https://packages.microsoft.com/config/ubuntu/22.04/packages-microsoft-prod.deb </pre>
+<pre>   sudo dpkg -i packages-microsoft-prod.deb</pre>
+<pre>  sudo apt update -y  </pre>
+<pre> sudo apt install dotnet-sdk-7.0</pre>
+<pre>  sudo apt update -y  </pre>
+<pre> sudo apt install dotnet-sdk-7.0</pre>
+ <pre> sudo apt update
+sudo apt dist-upgrade -y</pre>
