@@ -55,12 +55,7 @@ sudo apt install libssl1.1</per>
 
 <pre> sudo apt update
 sudo apt install -y mongodb-org</pre>
-<pre>
-  sudo systemctl enable mongod
-</pre>
-<pre>
-  sudo service mongod start
-</pre>
+<p> check status mongo services</p>
 <pre> 
   sudo service mongod status
 </pre>
@@ -74,6 +69,7 @@ sudo nano /etc/mongod.conf
 sudo systemctl restart mongod
 </pre>
 <pre> 
+  <p> trace services</p>
 sudo lsof -i | grep mongo
 </pre>
 
